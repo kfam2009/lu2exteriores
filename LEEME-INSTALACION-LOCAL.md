@@ -25,11 +25,10 @@ Si el panel se publica en Render/PanelGo, el servidor publicado debe usar:
 
 ```text
 VMIX_ACCESS_MODE=bridge
-VMIX_BRIDGE_SECRET=<clave-compartida>
 PANEL_BASE_PATH=/lu2exteriores
 ```
 
-En la PC donde corre vMix, abrir `Abrir Bridge LU2.cmd`, ingresar la URL publicada del panel y la misma clave compartida. El bridge toma los comandos del panel publicado y los ejecuta contra vMix local en `127.0.0.1:8088`.
+En la PC donde corre vMix, abrir `Abrir Bridge LU2.cmd` e ingresar la URL publicada del panel. El bridge toma los comandos del panel publicado y los ejecuta contra vMix local en `127.0.0.1:8088`.
 
 ## Overlays
 

@@ -8,7 +8,6 @@ const PORT = Number(process.env.PORT || 3000);
 const PANEL_BASE_PATH = normalizeBasePath(process.env.PANEL_BASE_PATH || "/lu2exteriores");
 const VMIX_ACCESS_MODE = process.env.VMIX_ACCESS_MODE || "direct";
 const USE_VMIX_BRIDGE = VMIX_ACCESS_MODE === "bridge";
-const VMIX_BRIDGE_SECRET = process.env.VMIX_BRIDGE_SECRET || "";
 const VMIX_HOST = process.env.VMIX_HOST || "127.0.0.1";
 const VMIX_PORT = Number(process.env.VMIX_PORT || 8088);
 const IS_REMOTE_VMIX = !["127.0.0.1", "localhost", "::1"].includes(VMIX_HOST.toLowerCase());
@@ -510,19 +509,6 @@ function serveStatic(req, res) {
   });
 }
 
-function bridgeSecretFromRequest(req) {
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  return req.headers["x-lu2-bridge-secret"] || url.searchParams.get("secret") || "";
-}
-
-function isBridgeAuthorized(req) {
-  return Boolean(VMIX_BRIDGE_SECRET) && bridgeSecretFromRequest(req) === VMIX_BRIDGE_SECRET;
-}
-
-function sendBridgeUnauthorized(res) {
-  send(res, 401, JSON.stringify({ error: "Bridge no autorizado" }), "application/json; charset=utf-8");
-}
-
 function bridgeStatusPayload() {
   return {
     mode: VMIX_ACCESS_MODE,
@@ -544,11 +530,6 @@ function dispatchBridgeCommands() {
 
 function enqueueBridgeCommand(pathname) {
   return new Promise((resolve, reject) => {
-    if (!VMIX_BRIDGE_SECRET) {
-      reject(new Error("Falta VMIX_BRIDGE_SECRET en el servidor publicado."));
-      return;
-    }
-
     const id = String(++bridgeCommandId);
     const timeout = setTimeout(() => {
       bridgePending.delete(id);
@@ -562,11 +543,6 @@ function enqueueBridgeCommand(pathname) {
 }
 
 async function serveBridgePoll(req, res) {
-  if (!isBridgeAuthorized(req)) {
-    sendBridgeUnauthorized(res);
-    return;
-  }
-
   bridgeLastSeenAt = Date.now();
 
   if (bridgeQueue.length) {
@@ -597,11 +573,6 @@ async function serveBridgePoll(req, res) {
 }
 
 async function serveBridgeResult(req, res) {
-  if (!isBridgeAuthorized(req)) {
-    sendBridgeUnauthorized(res);
-    return;
-  }
-
   bridgeLastSeenAt = Date.now();
 
   try {

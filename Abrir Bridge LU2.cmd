@@ -8,12 +8,5 @@ if "%PANEL_BASE_URL%"=="" (
   exit /b 1
 )
 
-set /p VMIX_BRIDGE_SECRET=Clave del bridge: 
-if "%VMIX_BRIDGE_SECRET%"=="" (
-  echo No se ingreso clave.
-  pause
-  exit /b 1
-)
-
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$env:PANEL_BASE_URL='%PANEL_BASE_URL%'; $env:VMIX_BRIDGE_SECRET='%VMIX_BRIDGE_SECRET%'; $env:VMIX_HOST='127.0.0.1'; $env:VMIX_PORT='8088'; if (Test-Path '.\runtime\node.exe') { & '.\runtime\node.exe' '.\bridge-client.js' } else { node '.\bridge-client.js' }"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$env:PANEL_BASE_URL='%PANEL_BASE_URL%'; $env:VMIX_HOST='127.0.0.1'; $env:VMIX_PORT='8088'; if (Test-Path '.\runtime\node.exe') { & '.\runtime\node.exe' '.\bridge-client.js' } else { node '.\bridge-client.js' }"
 pause

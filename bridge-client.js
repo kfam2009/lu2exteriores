@@ -2,16 +2,14 @@ const http = require("http");
 const https = require("https");
 
 const PANEL_BASE_URL = (process.env.PANEL_BASE_URL || "").replace(/\/+$/, "");
-const VMIX_BRIDGE_SECRET = process.env.VMIX_BRIDGE_SECRET || "";
 const VMIX_HOST = process.env.VMIX_HOST || "127.0.0.1";
 const VMIX_PORT = Number(process.env.VMIX_PORT || 8088);
 const POLL_DELAY_MS = 1200;
 
-if (!PANEL_BASE_URL || !VMIX_BRIDGE_SECRET) {
-  console.error("Faltan PANEL_BASE_URL y/o VMIX_BRIDGE_SECRET.");
+if (!PANEL_BASE_URL) {
+  console.error("Falta PANEL_BASE_URL.");
   console.error("Ejemplo:");
   console.error("  set PANEL_BASE_URL=https://panelgo-cloud.onrender.com/lu2exteriores");
-  console.error("  set VMIX_BRIDGE_SECRET=una-clave-larga");
   console.error("  node bridge-client.js");
   process.exit(1);
 }
@@ -55,7 +53,7 @@ function requestBuffer(url, options = {}, body = null) {
 }
 
 function bridgeUrl(path) {
-  return `${PANEL_BASE_URL}${path}${path.includes("?") ? "&" : "?"}secret=${encodeURIComponent(VMIX_BRIDGE_SECRET)}`;
+  return `${PANEL_BASE_URL}${path}`;
 }
 
 async function callVmix(commandPath) {
