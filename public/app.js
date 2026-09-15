@@ -13,14 +13,26 @@
   zocalos: {}
 };
 
+const APP_BASE_PATH = (() => {
+  const scriptPath = document.currentScript?.getAttribute("src") || "";
+  const scriptUrl = new URL(scriptPath, window.location.href);
+  const marker = "/lu2exteriores/";
+  const markerIndex = scriptUrl.pathname.indexOf(marker);
+  return markerIndex >= 0 ? scriptUrl.pathname.slice(0, markerIndex + marker.length - 1) : "";
+})();
+
+function appUrl(path) {
+  return `${APP_BASE_PATH}${path}`;
+}
+
 const monitorRefreshTimers = new Map();
 const zocaloSearchTerms = {};
 const previewOverlayInputsBySlot = {};
 let isRefreshingState = false;
 let lastClockWeatherTemperature = "";
-const PREVIEW_MONITOR_URL = "/monitor/preview.mjpg";
-const PROGRAM_MONITOR_URL = "/monitor/program.mjpg";
-const TANDAS_MONITOR_URL = "/monitor/tandas.mjpg";
+const PREVIEW_MONITOR_URL = appUrl("/monitor/preview.mjpg");
+const PROGRAM_MONITOR_URL = appUrl("/monitor/program.mjpg");
+const TANDAS_MONITOR_URL = appUrl("/monitor/tandas.mjpg");
 const MAIN_ZOCALO_INPUT = "58";
 const MAIN_ZOCALO_OVERLAY_SLOT = "1";
 const SYNC_PREVIEW_EXTERNAL3 = false;
@@ -425,7 +437,7 @@ function saveRadioAssignment(layoutInput, positionIndex, cameraInput) {
 
 async function callVmix(params = {}) {
   const query = new URLSearchParams(params);
-  const response = await fetch(`/vmix?${query.toString()}`);
+  const response = await fetch(appUrl(`/vmix?${query.toString()}`));
 
   if (!response.ok) {
     const text = await response.text();
@@ -459,7 +471,7 @@ function bahiaTimeText() {
 async function bahiaTemperatureText() {
   let weather = null;
   try {
-    const response = await fetch("/weather/bahia", { cache: "no-store" });
+    const response = await fetch(appUrl("/weather/bahia"), { cache: "no-store" });
     if (response.ok) {
       weather = await response.json();
     }
@@ -1097,7 +1109,7 @@ function refreshDirectSnapshots() {
     const image = button?.querySelector(".direct-thumb");
 
     if (image) {
-      image.src = `/snapshot/input/${direct.input}.jpg?t=${Date.now()}`;
+      image.src = appUrl(`/snapshot/input/${direct.input}.jpg?t=${Date.now()}`);
     }
   });
 }
@@ -1527,7 +1539,7 @@ function saveZocalos() {
 
 async function loadCentralZocalos() {
   try {
-    const response = await fetch("/data/zocalos", { cache: "no-store" });
+    const response = await fetch(appUrl("/data/zocalos"), { cache: "no-store" });
     if (response.ok) {
       const data = await response.json();
       zocaloProfiles = data.profiles || {};
@@ -1552,7 +1564,7 @@ async function loadCentralZocalos() {
 
 async function saveCentralZocalos(profile = selectedZocaloTab, items = state.zocalos) {
   try {
-    const response = await fetch("/data/zocalos", {
+    const response = await fetch(appUrl("/data/zocalos"), {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ profile, items })

@@ -5,6 +5,7 @@ const path = require("path");
 const { spawn } = require("child_process");
 
 const PORT = Number(process.env.PORT || 3000);
+const PANEL_BASE_PATH = normalizeBasePath(process.env.PANEL_BASE_PATH || "/lu2exteriores");
 const VMIX_HOST = process.env.VMIX_HOST || "172.27.79.174";
 const VMIX_PORT = Number(process.env.VMIX_PORT || 8088);
 const IS_REMOTE_VMIX = !["127.0.0.1", "localhost", "::1"].includes(VMIX_HOST.toLowerCase());
@@ -61,6 +62,31 @@ const MIME_TYPES = {
   ".json": "application/json; charset=utf-8",
   ".svg": "image/svg+xml; charset=utf-8"
 };
+
+function normalizeBasePath(basePath) {
+  const normalized = `/${String(basePath || "").trim().replace(/^\/+|\/+$/g, "")}`;
+  return normalized === "/" ? "" : normalized;
+}
+
+function requestPathname(req) {
+  return new URL(req.url, `http://${req.headers.host}`).pathname;
+}
+
+function pathWithoutPanelBase(pathname) {
+  if (!PANEL_BASE_PATH) {
+    return pathname;
+  }
+
+  if (pathname === PANEL_BASE_PATH) {
+    return "/";
+  }
+
+  if (pathname.startsWith(`${PANEL_BASE_PATH}/`)) {
+    return pathname.slice(PANEL_BASE_PATH.length) || "/";
+  }
+
+  return pathname;
+}
 
 function resolveFfmpegPath() {
   const candidates = [
@@ -449,12 +475,12 @@ async function refreshClockWeatherInput() {
 }
 
 function serveStatic(req, res) {
-  const requestPath = new URL(req.url, `http://${req.headers.host}`).pathname;
+  const requestPath = pathWithoutPanelBase(requestPathname(req));
   const panelRoutes = new Set([
-    "/lu2exteriores",
-    "/lu2exteriores/"
+    PANEL_BASE_PATH,
+    `${PANEL_BASE_PATH}/`
   ]);
-  const relativePath = requestPath === "/" || panelRoutes.has(requestPath)
+  const relativePath = requestPath === "/" || panelRoutes.has(requestPathname(req))
     ? "index.html"
     : requestPath.replace(/^\/+/, "");
   const safePath = path.normalize(relativePath).replace(/^(\.\.[/\\])+/, "");
@@ -662,7 +688,7 @@ async function serveProgramSnapshot(res) {
 
 async function serveInputSnapshot(req, res) {
   try {
-    const requestPath = new URL(req.url, `http://${req.headers.host}`).pathname;
+    const requestPath = pathWithoutPanelBase(requestPathname(req));
     const inputNumber = requestPath.match(/^\/snapshot\/input\/(\d+)\.jpg$/)?.[1];
 
     if (!inputNumber) {
@@ -903,50 +929,52 @@ function getSharedSrtStream() {
 }
 
 const server = http.createServer((req, res) => {
-  if (new URL(req.url, `http://${req.headers.host}`).pathname === "/data/zocalos") {
+  const pathname = pathWithoutPanelBase(requestPathname(req));
+
+  if (pathname === "/data/zocalos") {
     serveZocalos(req, res);
     return;
   }
-  if (IS_REMOTE_VMIX && !ENABLE_REMOTE_MONITORS && req.url.startsWith("/monitor/")) {
+  if (IS_REMOTE_VMIX && !ENABLE_REMOTE_MONITORS && pathname.startsWith("/monitor/")) {
     send(res, 204, "");
     return;
   }
 
-  if (req.url.startsWith("/monitor/program.mjpg")) {
+  if (pathname.startsWith("/monitor/program.mjpg")) {
     streamMonitor(req, res, "program");
     return;
   }
 
-  if (req.url.startsWith("/monitor/program.jpg")) {
+  if (pathname.startsWith("/monitor/program.jpg")) {
     serveProgramSnapshot(res);
     return;
   }
 
-  if (req.url.startsWith("/monitor/preview.jpg")) {
+  if (pathname.startsWith("/monitor/preview.jpg")) {
     servePreviewSnapshot(res);
     return;
   }
 
-  if (req.url.startsWith("/monitor/preview.mjpg")) {
+  if (pathname.startsWith("/monitor/preview.mjpg")) {
     streamMonitor(req, res, "preview");
     return;
   }
 
-  if (req.url.startsWith("/monitor/tandas.mjpg")) {
+  if (pathname.startsWith("/monitor/tandas.mjpg")) {
     streamSrtMonitor(req, res);
     return;
   }
-if (req.url.startsWith("/snapshot/input/")) {
+  if (pathname.startsWith("/snapshot/input/")) {
     serveInputSnapshot(req, res);
     return;
   }
 
-  if (req.url.startsWith("/vmix")) {
+  if (pathname.startsWith("/vmix")) {
     proxyVmix(req, res);
     return;
   }
 
-  if (req.url.startsWith("/weather/bahia")) {
+  if (pathname.startsWith("/weather/bahia")) {
     serveBahiaWeather(res);
     return;
   }
