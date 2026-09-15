@@ -19,8 +19,6 @@ Luego abrir, si no se abre solo:
 http://localhost:3000
 ```
 
-Para probar desde otra maquina por ZeroTier, usar `Abrir Panel Radio LU2 - ZEROTIER.cmd` e ingresar la IP ZeroTier real de la PC donde corre vMix.
-
 ## Overlays
 
 - Overlay 1: zocalo principal, input 58.
@@ -37,7 +35,6 @@ Para probar desde otra maquina por ZeroTier, usar `Abrir Panel Radio LU2 - ZEROT
 - `tools/ffmpeg/`: ffmpeg portable para monitores fluidos.
 - `start-panel-local.ps1`: arranque local recomendado.
 - `Abrir Panel Radio LU2.cmd`: arranque por doble click contra vMix local.
-- `Abrir Panel Radio LU2 - ZEROTIER.cmd`: arranque contra la IP ZeroTier que se ingrese al abrirlo.
 
 ## Notas
 
