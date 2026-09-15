@@ -1,0 +1,165 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel Radio LU2</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell lu2-shell">
+      <header class="topbar lu2-topbar">
+        <div class="brand-heading">
+          <img class="brand-logo" src="/brand-logo.png" alt="Radio LU2" onerror="this.hidden = true">
+          <h1>RADIO LU2</h1>
+        </div>
+        <div class="topbar-tools">
+          <section class="master-meter" aria-label="Vumetro master">
+            <div class="meter-head">
+              <span>MASTER</span>
+              <strong id="masterMeterValue">- dB</strong>
+            </div>
+            <div class="meter-bars">
+              <div class="meter-track">
+                <div class="meter-fill" id="masterMeterLeft"></div>
+              </div>
+              <div class="meter-track">
+                <div class="meter-fill" id="masterMeterRight"></div>
+              </div>
+            </div>
+          </section>
+          <div class="status-pill" id="connectionStatus">Conectando...</div>
+        </div>
+      </header>
+
+
+      <section class="monitor-grid" aria-label="Monitores de vMix">
+        <article class="monitor">
+          <div class="monitor-label">OUTPUT 2</div>
+          <div class="monitor-screen">
+            <div class="monitor-feed" id="previewFeed"></div>
+            <div class="monitor-fallback" id="previewFallback">Output 2 sin señal</div>
+          </div>
+        </article>
+        <article class="monitor">
+          <div class="monitor-label">PROGRAM</div>
+          <div class="monitor-screen">
+            <div class="monitor-feed" id="programFeed"></div>
+            <div class="monitor-fallback" id="programFallback">Programa sin señal</div>
+          </div>
+        </article>
+        <article class="monitor">
+          <div class="monitor-label">BVC</div>
+          <div class="monitor-screen">
+            <div class="monitor-feed" id="tandasFeed"></div>
+            <div class="monitor-fallback" id="tandasFallback">SRT sin señal</div>
+          </div>
+        </article>
+      </section>
+      <nav class="tabbar control-tabs" aria-label="Secciones del panel">
+        <button type="button" class="tab-button is-active" data-tab="cut">Directo</button>
+        <button type="button" class="tab-button" data-tab="zocalos">Zocalos</button>
+        <button type="button" class="tab-button" data-tab="panelistas">Panelistas</button>
+        <button type="button" class="tab-button" data-tab="multiview">Multiview</button>
+        <button type="button" class="tab-button" data-tab="publicidades">Tandas</button>
+        <button type="button" class="tab-button" data-tab="programas">Programas</button>
+        <button type="button" class="tab-button" data-tab="reset">Reset</button>
+        <button type="button" class="nav-radio-button" data-radio-return>RADIO</button>
+        <button type="button" class="nav-zocalo-button" data-main-zocalo-toggle>ZOCALO OFF</button>
+      </nav>
+
+      <div class="tab-panels">
+        <section class="control-section direct-panel" data-tab-panel="cut" aria-label="Directos">
+          <div class="section-title">
+            <h2>Directo</h2>
+          </div>
+          <div class="direct-grid" id="directCutGrid"></div>
+        </section>
+
+        <section class="control-section overlay-panel" data-tab-panel="zocalos" aria-label="Zocalos" hidden>
+          <div class="section-title">
+            <h2>Zocalos</h2>
+            <span class="multiview-target">Overlay 1</span>
+          </div>
+
+          <div class="zocalo-layout zocalos-grid">
+            <div class="zocalo-subtabs" id="zocaloSubtabs"></div>
+            <div class="zocalo-board" id="zocaloBoard"></div>
+          </div>
+        </section>
+
+
+        <section class="control-section photo-panel" data-tab-panel="panelistas" aria-label="Panelistas" hidden>
+          <div class="section-title">
+            <h2>Panelistas</h2>
+            <span class="multiview-target">Overlay 4</span>
+          </div>
+          <div class="sponsor-layout tanda-actions">
+            <button type="button" class="sponsor-button" data-photo-action="preview">
+              Ver en previo
+            </button>
+            <button type="button" class="sponsor-button" data-utc-overlay="23" data-utc-slot="4">
+              Panelista ON/OFF
+            </button>
+          </div>
+          <div class="photo-add-row">
+            <input type="text" id="photoPathInput" placeholder="Direccion fisica de la foto">
+            <button type="button" id="photoAddButton">Agregar</button>
+          </div>
+          <div class="photo-list" id="photoList"></div>
+          <div class="photo-actions">
+            <button type="button" data-photo-action="apply">Aplicar foto</button>
+            <button type="button" data-photo-action="multiview">Poner en 4 camaras</button>
+            <button type="button" data-photo-action="remove">Quitar de lista</button>
+          </div>
+        </section>
+        <section class="control-section multiview-panel" data-tab-panel="multiview" aria-label="Multiview" hidden>
+          <div class="section-title">
+            <h2>Multiview</h2>
+            <span class="multiview-target" id="radioMultiviewStatus">Selecciona formato</span>
+          </div>
+          <div class="mv-layout-tabs" id="radioMultiviewLayouts"></div>
+          <div class="mv-grid" id="radioMultiviewGrid"></div>
+        </section>
+
+        <section class="control-section sponsor-panel" data-tab-panel="publicidades" aria-label="Tandas" hidden>
+          <div class="section-title">
+            <h2>Tandas</h2>
+            <span class="multiview-target">Salida a Output 2</span>
+          </div>
+          <div class="tanda-grid" id="tandaGrid"></div>
+        </section>
+
+        <section class="control-section programs-panel" data-tab-panel="programas" aria-label="Programas" hidden>
+          <div class="section-title">
+            <h2>Programas</h2>
+            <span class="multiview-target">Overlay 4 · ON/OFF</span>
+          </div>
+          <div class="programs-grid" id="programsGrid"></div>
+        </section>
+
+        <section class="control-section reset-panel" data-tab-panel="reset" aria-label="Reset" hidden>
+          <div class="section-title">
+            <h2>Reset</h2>
+            <span class="multiview-target">Camaras</span>
+          </div>
+          <div class="sponsor-grid reset-grid" id="resetGrid"></div>
+        </section>
+      </div>
+
+      <p class="log" id="logLine" hidden>Listo.</p>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+

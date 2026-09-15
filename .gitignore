@@ -1,0 +1,12 @@
+*.zip
+node_modules/
+runtime/
+tools/
+input-snapshots/
+preview-live.jpg
+program-live.jpg
+program-output-live.jpg
+*.bak-*
+*.tmp
+zocalos-data.backup.json
+ponchado abril 2026

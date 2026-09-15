@@ -1,0 +1,1336 @@
+{
+  "version": 1,
+  "profiles": {
+    "general": [
+      {
+        "id": "lu2-z1-top-001",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PANORAMA"
+      },
+      {
+        "id": "z-1788600714932-top-6298c14cc521c",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "TODO CAMPO"
+      },
+      {
+        "id": "z-1788609694930-top-31db5db8faf9c",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ENTRETIEMPO"
+      },
+      {
+        "id": "z-1788600725062-top-bd47577c37c1c",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788125666373-top-bbedb38eb473",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "AM 840 KHZ - FM 92.7 MHZ"
+      },
+      {
+        "id": "z-1787864840692-top-95248b90707338",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-002",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "NORMAN FERNÁNDEZ"
+      },
+      {
+        "id": "lu2-z1-top-003",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Móvil: Danilo Belloni"
+      },
+      {
+        "id": "lu2-z1-top-004",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "MÓVIL: PABLO PASCUAL"
+      },
+      {
+        "id": "lu2-z1-top-005",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "DR. OSCAR COLOMBO"
+      },
+      {
+        "id": "lu2-z1-top-006",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "MICRO DE OPINIÓN"
+      },
+      {
+        "id": "lu2-z1-top-007",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA VOZ DEL CAMPO"
+      },
+      {
+        "id": "lu2-z1-top-008",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "EL PASE"
+      },
+      {
+        "id": "lu2-z1-top-009",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-010",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "FAMILIA COOPERATIVA"
+      },
+      {
+        "id": "lu2-z1-top-011",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-012",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "WHATSAPP 291-641-44-42"
+      },
+      {
+        "id": "z-1787940299384-top-e5138efb540fe8",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA VOZ DEL CAMPO"
+      },
+      {
+        "id": "lu2-z1-top-013",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "     "
+      },
+      {
+        "id": "lu2-z1-top-014",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA COCINA DE NATI !"
+      },
+      {
+        "id": "lu2-z1-top-015",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-016",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ABOGADO ALFREDO BERNABEI"
+      },
+      {
+        "id": "lu2-z1-top-017",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-018",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "NUTRICIÓN CON MACARENA ÁLVAREZ"
+      },
+      {
+        "id": "lu2-z1-top-019",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "VIAJES LA NUEVA"
+      },
+      {
+        "id": "lu2-z1-top-020",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-021",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LOS NÚMEROS EN PANORAMA"
+      },
+      {
+        "id": "lu2-z1-top-022",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-023",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PRONÓSTICO DEL TIEMPO"
+      },
+      {
+        "id": "lu2-z1-top-024",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Daniel \"Meteorito\" Dodero"
+      },
+      {
+        "id": "lu2-z1-top-025",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-026",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA VOZ DEL CAMPO"
+      },
+      {
+        "id": "lu2-z1-top-027",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ALEJANDRO CANEPPA"
+      },
+      {
+        "id": "lu2-z1-top-028",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LORENA CARONNA"
+      },
+      {
+        "id": "lu2-z1-top-029",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "UNA DEPORTIVA CON VICTOR HUGO"
+      },
+      {
+        "id": "lu2-z1-top-030",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "UNA DEPORTIVA "
+      },
+      {
+        "id": "lu2-z1-top-031",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "CINE CON LUCÍA DIÁCOLO"
+      },
+      {
+        "id": "lu2-z1-top-032",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-033",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "WHATSAPP 291-641-44-42"
+      },
+      {
+        "id": "lu2-z1-top-034",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "INFORMATIVO 10:00 HS"
+      },
+      {
+        "id": "lu2-z1-top-035",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "TITULOS 10:30 HS"
+      },
+      {
+        "id": "lu2-z1-top-036",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "INFORMATIVO 11:00 HS"
+      },
+      {
+        "id": "lu2-z1-top-037",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "TITULOS 11:30 HS"
+      },
+      {
+        "id": "lu2-z1-top-038",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-039",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "WHATSAPP 291-641-44-42"
+      },
+      {
+        "id": "lu2-z1-top-040",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-041",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "VIRGINIA  PALACIOS"
+      },
+      {
+        "id": "lu2-z1-top-042",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ESTÁ TODO INVENTADO"
+      },
+      {
+        "id": "lu2-z1-top-043",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-044",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "       SERGIO CRIVELLI DESDE EL CONGRESO"
+      },
+      {
+        "id": "lu2-z1-top-045",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-046",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LAS TRES DE LA MAÑANA"
+      },
+      {
+        "id": "lu2-z1-top-047",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "INFORMATIVO DE LA ZONA 9:00 HS"
+      },
+      {
+        "id": "lu2-z1-top-048",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-049",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA MÚSICA DE LOS VIERNES"
+      },
+      {
+        "id": "lu2-z1-top-050",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PANORAMA MÚSICAL"
+      },
+      {
+        "id": "lu2-z1-top-051",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LOS NÚMEROS DE LA SUERTE"
+      },
+      {
+        "id": "lu2-z1-top-052",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-053",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ABOGADO ALFREDO BERNABEI"
+      },
+      {
+        "id": "lu2-z1-top-054",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LICENCIADO CHRISTIAN LEPRÓN "
+      },
+      {
+        "id": "lu2-z1-top-055",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-056",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "      ACTUALIDAD DE SAN LORENZO DE ALMAGRO"
+      },
+      {
+        "id": "lu2-z1-top-057",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "TÍTULOS EN PANORAMA"
+      },
+      {
+        "id": "lu2-z1-top-058",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PANORAMA PORTUARIO"
+      },
+      {
+        "id": "lu2-z1-top-059",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-060",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-061",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LUCIANA CARDILLO DESDE MONTE HERMOSO"
+      },
+      {
+        "id": "lu2-z1-top-062",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "        ALFREDO BERNABEI TEMAS PREVÍSÍONALES"
+      },
+      {
+        "id": "lu2-z1-top-063",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-064",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Fran Villafañez - Tecnología"
+      },
+      {
+        "id": "lu2-z1-top-065",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Andrés Cisneros Panorama Internacional"
+      },
+      {
+        "id": "lu2-z1-top-066",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Ricardo Salas desde La Plata"
+      },
+      {
+        "id": "lu2-z1-top-067",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "La actualidad de Tornquist"
+      },
+      {
+        "id": "lu2-z1-top-068",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-069",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "        accidente en zelarrayán y sesquicentenario "
+      },
+      {
+        "id": "lu2-z1-top-070",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Visita del Papa León XIV"
+      },
+      {
+        "id": "lu2-z1-top-071",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Prisión preventiva de Eleazar Larraburu"
+      },
+      {
+        "id": "z-1788257933742-top-4d089aff07316",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-079",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "SERIES CON GUILLE CRISAFULLI"
+      },
+      {
+        "id": "lu2-z1-top-080",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "A Las Chapas Radio"
+      },
+      {
+        "id": "z-1787958866110-top-ff40cb93f793e",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "EL EXPRESO CON  OSCAR CIVERCHIA"
+      },
+      {
+        "id": "z-1787955867998-top-b199b08ace84a8",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "RADIOVISIÓN DEPORTIVA 13 HS"
+      },
+      {
+        "id": "z-1787955943256-top-189a84e615a3d8",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "DÚPLEX CON SEBASTIÁN SCHAPIRO"
+      },
+      {
+        "id": "z-1787956008152-top-b4e84bdb7898a",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "NOTICIAS "
+      },
+      {
+        "id": "z-1787932089797-top-cf9cd4ce9bdbf",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "RadioVisión Deportiva 13 Hs"
+      },
+      {
+        "id": "z-1787932113512-top-b27741c5d10f38",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ALLICA Y PRIETA"
+      },
+      {
+        "id": "lu2-z1-top-081",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "       NOVEDADES DEL TORNEO FEDERAL A"
+      },
+      {
+        "id": "lu2-z1-top-082",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1787739440810-top-a940d04752eae",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "               Alex Lagos"
+      },
+      {
+        "id": "z-1787739645498-top-badfc8807ac3f",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788171732580-top-baf6d7be5a4098",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788178444682-top-f997c78d9d639",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-060",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ALFREDO BERNABEI TEMAS PREVÍSÍONALES"
+      },
+      {
+        "id": "lu2-z1-top-068",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Leandro Valente, Padres escuelas medias UNS"
+      },
+      {
+        "id": "lu2-z1-top-070",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Martín Larrea, colegio de Gestores"
+      },
+      {
+        "id": "lu2-z1-top-078",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LU2 96 AÑOS !!"
+      },
+      {
+        "id": "lu2-z1-top-024",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "DANIEL  \"METEORITO \" DODERO "
+      },
+      {
+        "id": "lu2-z1-top-034",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "INFORMATIVO 10HS"
+      },
+      {
+        "id": "lu2-z1-top-041",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "VIRGINIA PALACIOS"
+      },
+      {
+        "id": "lu2-z1-top-017",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "SERIES CON GUILLE CRISAFULLI"
+      },
+      {
+        "id": "lu2-z1-top-031",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "    UNA DEPORTIVA  CON JUAN CARLOS"
+      },
+      {
+        "id": "lu2-z1-top-079",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-080",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-067",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-055",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "MICRO CINE CON LUCÍA DÍACOLO"
+      },
+      {
+        "id": "lu2-z1-top-063",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Carlos Chesñevar, IA  Los trabajos del futuro"
+      },
+      {
+        "id": "lu2-z1-top-062",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-069",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-071",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      }
+    ],
+    "panorama": [
+      {
+        "id": "lu2-z1-top-001",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PANORAMA"
+      },
+      {
+        "id": "lu2-z1-top-002",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "NORMAN FERNÁNDEZ"
+      },
+      {
+        "id": "lu2-z1-top-003",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Móvil: Danilo Belloni"
+      },
+      {
+        "id": "lu2-z1-top-004",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "MÓVIL: PABLO PASCUAL"
+      },
+      {
+        "id": "lu2-z1-top-005",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "DR. OSCAR COLOMBO"
+      },
+      {
+        "id": "lu2-z1-top-006",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "MICRO DE OPINIÓN"
+      },
+      {
+        "id": "lu2-z1-top-007",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA VOZ DEL CAMPO"
+      },
+      {
+        "id": "lu2-z1-top-008",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "EL PASE"
+      },
+      {
+        "id": "lu2-z1-top-009",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-010",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "FAMILIA COOPERATIVA"
+      },
+      {
+        "id": "lu2-z1-top-011",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-012",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "WHATSAPP 291-641-44-42"
+      },
+      {
+        "id": "z-1789040044672-top-72f35a6304307",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1787940299384-top-e5138efb540fe8",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA VOZ DEL CAMPO"
+      },
+      {
+        "id": "lu2-z1-top-013",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "     "
+      },
+      {
+        "id": "lu2-z1-top-016",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ABOGADO ALFREDO BERNABEI"
+      },
+      {
+        "id": "lu2-z1-top-020",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-021",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LOS NÚMEROS EN PANORAMA"
+      },
+      {
+        "id": "lu2-z1-top-022",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-023",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PRONÓSTICO DEL TIEMPO"
+      },
+      {
+        "id": "lu2-z1-top-025",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "DANIEL  \"METEORITO \" DODERO "
+      },
+      {
+        "id": "z-1788878991862-top-c222fee853d5",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-026",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA VOZ DEL CAMPO"
+      },
+      {
+        "id": "lu2-z1-top-027",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ALEJANDRO CANEPPA"
+      },
+      {
+        "id": "lu2-z1-top-028",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LORENA CARONNA"
+      },
+      {
+        "id": "lu2-z1-top-029",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "UNA DEPORTIVA CON VICTOR HUGO"
+      },
+      {
+        "id": "lu2-z1-top-030",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "UNA DEPORTIVA "
+      },
+      {
+        "id": "lu2-z1-top-032",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-044",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "       SERGIO CRIVELLI DESDE EL CONGRESO"
+      },
+      {
+        "id": "lu2-z1-top-045",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-046",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LAS TRES DE LA MAÑANA"
+      },
+      {
+        "id": "lu2-z1-top-047",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "INFORMATIVO DE LA ZONA 9:00 HS"
+      },
+      {
+        "id": "lu2-z1-top-048",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-049",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA MÚSICA DE LOS VIERNES"
+      },
+      {
+        "id": "lu2-z1-top-050",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PANORAMA MÚSICAL"
+      },
+      {
+        "id": "lu2-z1-top-051",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LOS NÚMEROS DE LA SUERTE"
+      },
+      {
+        "id": "lu2-z1-top-052",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-053",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ABOGADO ALFREDO BERNABEI"
+      },
+      {
+        "id": "lu2-z1-top-054",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LICENCIADO CHRISTIAN LEPRÓN "
+      },
+      {
+        "id": "lu2-z1-top-055",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-057",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "TÍTULOS EN PANORAMA"
+      },
+      {
+        "id": "lu2-z1-top-058",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PANORAMA PORTUARIO"
+      },
+      {
+        "id": "lu2-z1-top-059",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-060",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "      ALFREDO BERNABEI TEMAS PREVÍSÍONALES"
+      },
+      {
+        "id": "lu2-z1-top-061",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LUCIANA CARDILLO DESDE MONTE HERMOSO"
+      },
+      {
+        "id": "z-1788953202307-top-0dfc7d32663bc",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-065",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Andrés Cisneros Panorama Internacional"
+      },
+      {
+        "id": "lu2-z1-top-066",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Ricardo Salas desde La Plata"
+      },
+      {
+        "id": "lu2-z1-top-067",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "La actualidad de Tornquist"
+      },
+      {
+        "id": "lu2-z1-top-082",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1787739440810-top-a940d04752eae",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "La actualidad de Tornquist"
+      },
+      {
+        "id": "z-1787739645498-top-badfc8807ac3f",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "Carlos Chesñevar"
+      },
+      {
+        "id": "z-1788171732580-top-baf6d7be5a4098",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "Martin Nistal"
+      },
+      {
+        "id": "z-1789038320671-top-5f9ba5db8a1838",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "Micro de Salud"
+      },
+      {
+        "id": "z-1788178444682-top-f997c78d9d639",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "Santiago Mandolesi Burgos"
+      },
+      {
+        "id": "z-1789040004313-top-c0cc03a82a88a",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-060",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ALFREDO BERNABEI TEMAS PREVÍSÍONALES"
+      },
+      {
+        "id": "lu2-z1-top-041",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "VIRGINIA PALACIOS"
+      },
+      {
+        "id": "lu2-z1-top-017",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "SERIES CON GUILLE CRISAFULLI"
+      },
+      {
+        "id": "lu2-z1-top-031",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "    UNA DEPORTIVA  CON JUAN CARLOS"
+      },
+      {
+        "id": "lu2-z1-top-067",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-055",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "MICRO CINE CON LUCÍA DÍACOLO"
+      },
+      {
+        "id": "lu2-z1-top-063",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Carlos Chesñevar, IA  Los trabajos del futuro"
+      },
+      {
+        "id": "z-1788953248419-top-1b5c49c0e2449",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Fiesta de las Colectividades"
+      },
+      {
+        "id": "z-1789037516795-top-e77a16ec1d2898",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Visita del Papa León XIV"
+      },
+      {
+        "id": "z-1789040604807-top-de3c2b74a327d8",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Marianela Meneghetti, Lic. en Psicología"
+      }
+    ],
+    "inventado": [
+      {
+        "id": "lu2-z1-top-002",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "WHATSAPP 291-641-44-42"
+      },
+      {
+        "id": "lu2-z1-top-003",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Móvil: Danilo Belloni"
+      },
+      {
+        "id": "lu2-z1-top-004",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "MÓVIL: PABLO PASCUAL"
+      },
+      {
+        "id": "lu2-z1-top-013",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "     "
+      },
+      {
+        "id": "lu2-z1-top-014",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LA COCINA DE NATI !"
+      },
+      {
+        "id": "lu2-z1-top-018",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "NUTRICIÓN CON MACARENA ÁLVAREZ"
+      },
+      {
+        "id": "lu2-z1-top-019",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "VIAJES LA NUEVA"
+      },
+      {
+        "id": "lu2-z1-top-022",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-023",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "PRONÓSTICO DEL TIEMPO"
+      },
+      {
+        "id": "lu2-z1-top-025",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "DANIEL  \"METEORITO \" DODERO "
+      },
+      {
+        "id": "z-1788879067598-top-3c35ad74d70f48",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-029",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "UNA DEPORTIVA CON VICTOR HUGO"
+      },
+      {
+        "id": "lu2-z1-top-030",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "UNA DEPORTIVA "
+      },
+      {
+        "id": "lu2-z1-top-032",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788876980805-top-166fa0df6ba54",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "INFORMATIVO  10:00 HS"
+      },
+      {
+        "id": "lu2-z1-top-035",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "TITULOS 10:30 HS"
+      },
+      {
+        "id": "lu2-z1-top-036",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "INFORMATIVO 11:00 HS"
+      },
+      {
+        "id": "lu2-z1-top-037",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "TITULOS 11:30 HS"
+      },
+      {
+        "id": "lu2-z1-top-038",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-039",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "WHATSAPP 291-641-44-42"
+      },
+      {
+        "id": "lu2-z1-top-040",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "VIRGINIA  PALACIOS"
+      },
+      {
+        "id": "lu2-z1-top-042",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "ESTÁ TODO INVENTADO"
+      },
+      {
+        "id": "lu2-z1-top-054",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-061",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "LUCIANA CARDILLO DESDE MONTE HERMOSO"
+      },
+      {
+        "id": "lu2-z1-top-064",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Fran Villafañez - Tecnología"
+      },
+      {
+        "id": "z-1787739440810-top-a940d04752eae",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "La actualidad de Tornquist"
+      },
+      {
+        "id": "z-1787739645498-top-badfc8807ac3f",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "Ricardo De Weerth"
+      },
+      {
+        "id": "z-1788171732580-top-baf6d7be5a4098",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "Uriel dueño del voyague"
+      },
+      {
+        "id": "z-1788178444682-top-f997c78d9d639",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "Robo de la moto"
+      },
+      {
+        "id": "lu2-z1-top-069",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-071",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "Choque en Vieytes al 300"
+      }
+    ],
+    "duplex": [
+      {
+        "id": "lu2-z1-top-001",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "CON SEBASTIÁN SCHAPIRO"
+      },
+      {
+        "id": "z-1787739440810-top-a940d04752eae",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "La actualidad de Tornquist"
+      },
+      {
+        "id": "z-1787739645498-top-badfc8807ac3f",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788171732580-top-baf6d7be5a4098",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788178444682-top-f997c78d9d639",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-071",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      }
+    ],
+    "noticias": [
+      {
+        "id": "lu2-z1-top-001",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "CON NÉSTOR DE LA  IGLESIA Y EQUIPO"
+      },
+      {
+        "id": "z-1788600714932-top-6298c14cc521c",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": "WHATSAPP 291-641-44-42"
+      },
+      {
+        "id": "z-1787739440810-top-a940d04752eae",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": "La actualidad de Tornquist"
+      },
+      {
+        "id": "z-1787739645498-top-badfc8807ac3f",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788171732580-top-baf6d7be5a4098",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "z-1788178444682-top-f997c78d9d639",
+        "type": "lu2-referencia",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-069",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      },
+      {
+        "id": "lu2-z1-top-071",
+        "type": "lu2-zocalo-1",
+        "line": "top",
+        "text": ""
+      }
+    ]
+  },
+  "updatedAt": "2026-09-10T16:25:08.490Z"
+}
