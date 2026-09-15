@@ -3,15 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Panel Radio LU2</title>
+    <title>LU2 Exteriores</title>
     <link rel="stylesheet" href="/lu2exteriores/styles.css">
+    <script src="/panel-config.js"></script>
   </head>
   <body>
     <main class="app-shell lu2-shell">
       <header class="topbar lu2-topbar">
         <div class="brand-heading">
-          <img class="brand-logo" src="/lu2exteriores/brand-logo.png" alt="Radio LU2" onerror="this.hidden = true">
-          <h1>RADIO LU2</h1>
+          <img class="brand-logo" src="/lu2exteriores/brand-logo.png" alt="LU2 Exteriores" onerror="this.hidden = true">
+          <h1>LU2 EXTERIORES</h1>
         </div>
         <div class="topbar-tools">
           <section class="master-meter" aria-label="Vumetro master">
@@ -38,21 +39,14 @@
           <div class="monitor-label">OUTPUT 2</div>
           <div class="monitor-screen">
             <div class="monitor-feed" id="previewFeed"></div>
-            <div class="monitor-fallback" id="previewFallback">Monitor reservado</div>
+            <div class="monitor-fallback" id="previewFallback">Monitor local sin señal</div>
           </div>
         </article>
         <article class="monitor">
           <div class="monitor-label">PROGRAM</div>
           <div class="monitor-screen">
             <div class="monitor-feed" id="programFeed"></div>
-            <div class="monitor-fallback" id="programFallback">Monitor reservado</div>
-          </div>
-        </article>
-        <article class="monitor">
-          <div class="monitor-label">BVC</div>
-          <div class="monitor-screen">
-            <div class="monitor-feed" id="tandasFeed"></div>
-            <div class="monitor-fallback" id="tandasFallback">Monitor reservado</div>
+            <div class="monitor-fallback" id="programFallback">Monitor local sin señal</div>
           </div>
         </article>
       </section>

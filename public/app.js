@@ -32,7 +32,20 @@ let isRefreshingState = false;
 let lastClockWeatherTemperature = "";
 const PREVIEW_MONITOR_URL = "";
 const PROGRAM_MONITOR_URL = "";
-const TANDAS_MONITOR_URL = "";
+const rtcMonitors = {
+  started: false,
+  socket: null,
+  pc: null,
+  reconnectTimer: null,
+  fallbackTimer: null,
+  previewStream: null,
+  programStream: null,
+  streamMap: {},
+  viewerId: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+  lastFrameAt: 0,
+  watchdogStarted: false,
+  reconnect: null
+};
 const MAIN_ZOCALO_INPUT = "58";
 const MAIN_ZOCALO_OVERLAY_SLOT = "1";
 const SYNC_PREVIEW_EXTERNAL3 = false;
@@ -322,10 +335,8 @@ let zocaloPanels = {};
 const els = {
   programFeed: document.querySelector("#programFeed"),
   previewFeed: document.querySelector("#previewFeed"),
-  tandasFeed: document.querySelector("#tandasFeed"),
   programFallback: document.querySelector("#programFallback"),
   previewFallback: document.querySelector("#previewFallback"),
-  tandasFallback: document.querySelector("#tandasFallback"),
   status: document.querySelector("#connectionStatus"),
   logLine: document.querySelector("#logLine"),
   inputCards: [...document.querySelectorAll(".input-card")],
@@ -613,25 +624,27 @@ function loadMonitorConfig() {
 }
 
 function renderMonitorConfig() {
-  if (!els.previewFeed || !els.programFeed || !els.tandasFeed) {
+  if (!els.previewFeed || !els.programFeed) {
+    return;
+  }
+
+  if (window.PANEL_CONFIG?.monitorMode === "webrtc") {
+    startRtcMonitors();
     return;
   }
 
   renderMonitorFeed("preview", PREVIEW_MONITOR_URL);
   renderMonitorFeed("program", PROGRAM_MONITOR_URL);
-  renderMonitorFeed("tandas", TANDAS_MONITOR_URL);
 }
 
 function renderMonitorFeed(kind, url) {
   const feeds = {
     preview: els.previewFeed,
-    program: els.programFeed,
-    tandas: els.tandasFeed
+    program: els.programFeed
   };
   const fallbacks = {
     preview: els.previewFallback,
-    program: els.programFallback,
-    tandas: els.tandasFallback
+    program: els.programFallback
   };
   const feed = feeds[kind];
   const fallback = fallbacks[kind];
@@ -683,6 +696,169 @@ function renderMonitorFeed(kind, url) {
     frame.referrerPolicy = "no-referrer";
     feed.appendChild(frame);
   }
+}
+
+function rtcUrl() {
+  const url = new URL(window.PANEL_CONFIG?.rtcPath || "/rtc", window.location.href);
+  url.protocol = url.protocol === "https:" ? "wss:" : "ws:";
+  url.search = `?role=viewer&viewerId=${encodeURIComponent(rtcMonitors.viewerId)}`;
+  return url.toString();
+}
+
+function setMonitorVideo(feed, stream, kind) {
+  if (!feed) return;
+  let video = feed.querySelector("video");
+  if (!video) {
+    feed.innerHTML = "";
+    video = document.createElement("video");
+    video.autoplay = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.title = `Monitor ${kind}`;
+    video.addEventListener("timeupdate", () => {
+      rtcMonitors.lastFrameAt = Date.now();
+    });
+    feed.appendChild(video);
+  }
+  if (video.srcObject !== stream) {
+    video.srcObject = stream;
+    video.play().catch(() => {});
+  }
+}
+
+function setRtcStreams(previewStream, programStream) {
+  if (previewStream) {
+    els.previewFeed.classList.add("is-live");
+    els.previewFallback.hidden = true;
+    setMonitorVideo(els.previewFeed, previewStream, "preview");
+  }
+  if (programStream) {
+    els.programFeed.classList.add("is-live");
+    els.programFallback.hidden = true;
+    setMonitorVideo(els.programFeed, programStream, "program");
+  }
+}
+
+function clearRtcConnection() {
+  if (rtcMonitors.fallbackTimer) {
+    clearTimeout(rtcMonitors.fallbackTimer);
+    rtcMonitors.fallbackTimer = null;
+  }
+  if (rtcMonitors.socket) {
+    rtcMonitors.socket.onclose = null;
+    try { rtcMonitors.socket.close(); } catch {}
+  }
+  if (rtcMonitors.pc) {
+    rtcMonitors.pc.onconnectionstatechange = null;
+    rtcMonitors.pc.onicecandidate = null;
+    rtcMonitors.pc.ontrack = null;
+    try { rtcMonitors.pc.close(); } catch {}
+  }
+  rtcMonitors.socket = null;
+  rtcMonitors.pc = null;
+}
+
+function startRtcMonitors() {
+  if (rtcMonitors.started) return;
+  rtcMonitors.started = true;
+
+  if (!rtcMonitors.watchdogStarted) {
+    rtcMonitors.watchdogStarted = true;
+    setInterval(() => {
+      if (document.hidden || !rtcMonitors.pc || rtcMonitors.pc.connectionState !== "connected") return;
+      if (Date.now() - rtcMonitors.lastFrameAt < 9000) return;
+      rtcMonitors.reconnect?.(500);
+    }, 3000);
+  }
+
+  const connect = () => {
+    clearRtcConnection();
+    const socket = new WebSocket(rtcUrl());
+    const pc = new RTCPeerConnection({ iceServers: window.PANEL_CONFIG?.iceServers || [] });
+    let gotPreviewTrack = false;
+    let gotProgramTrack = false;
+    rtcMonitors.socket = socket;
+    rtcMonitors.pc = pc;
+    rtcMonitors.streamMap = {};
+
+    const scheduleReconnect = (delay = 1800) => {
+      if (rtcMonitors.reconnectTimer) return;
+      rtcMonitors.reconnectTimer = setTimeout(() => {
+        rtcMonitors.reconnectTimer = null;
+        connect();
+      }, delay);
+      clearRtcConnection();
+    };
+    rtcMonitors.reconnect = scheduleReconnect;
+
+    pc.ontrack = (event) => {
+      const name = rtcMonitors.streamMap[event.transceiver?.mid] || (Object.keys(rtcMonitors.streamMap).length ? "program" : "preview");
+      const stream = event.streams[0] || new MediaStream([event.track]);
+      if (name === "preview") {
+        gotPreviewTrack = true;
+        rtcMonitors.previewStream = stream;
+      }
+      if (name === "program") {
+        gotProgramTrack = true;
+        rtcMonitors.programStream = stream;
+      }
+      rtcMonitors.lastFrameAt = Date.now();
+      setRtcStreams(rtcMonitors.previewStream, rtcMonitors.programStream);
+      if (gotPreviewTrack && gotProgramTrack && rtcMonitors.fallbackTimer) {
+        clearTimeout(rtcMonitors.fallbackTimer);
+        rtcMonitors.fallbackTimer = null;
+      }
+    };
+    pc.onicecandidate = (event) => {
+      if (event.candidate && socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({ type: "ice-candidate", candidate: event.candidate }));
+      }
+    };
+    pc.onconnectionstatechange = () => {
+      if (["failed", "closed"].includes(pc.connectionState)) {
+        scheduleReconnect();
+      } else if (pc.connectionState === "disconnected") {
+        scheduleReconnect(6500);
+      }
+    };
+
+    socket.addEventListener("open", () => {
+      socket.send(JSON.stringify({ type: "viewer-ready" }));
+      rtcMonitors.fallbackTimer = setTimeout(() => {
+        if (!gotPreviewTrack || !gotProgramTrack) scheduleReconnect();
+      }, 15000);
+    });
+    socket.addEventListener("message", async (event) => {
+      let message;
+      try {
+        message = JSON.parse(event.data);
+      } catch {
+        return;
+      }
+
+      if (message.type === "publisher-offer") {
+        rtcMonitors.streamMap = Object.fromEntries((message.streams || []).map((item) => [item.mid, item.name]));
+        await pc.setRemoteDescription(message.offer);
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        socket.send(JSON.stringify({ type: "viewer-answer", answer }));
+        return;
+      }
+
+      if (message.type === "ice-candidate") {
+        await pc.addIceCandidate(message.candidate).catch(() => {});
+        return;
+      }
+
+      if (message.type === "publisher-offline") {
+        scheduleReconnect();
+      }
+    });
+    socket.addEventListener("close", () => scheduleReconnect(2500));
+    socket.addEventListener("error", () => scheduleReconnect(2500));
+  };
+
+  connect();
 }
 
 function renderInputButtons() {
