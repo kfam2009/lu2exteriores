@@ -5,6 +5,7 @@
   "description": "Local web control panel for vMix HTTP API.",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js"
+    "bridge": "node bridge-client.js",
+    "check": "node --check server.js && node --check bridge-client.js && node --check public/app.js"
   }
 }

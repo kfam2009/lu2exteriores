@@ -19,6 +19,18 @@ Luego abrir, si no se abre solo:
 http://localhost:3000
 ```
 
+## Bridge para panel publicado
+
+Si el panel se publica en Render/PanelGo, el servidor publicado debe usar:
+
+```text
+VMIX_ACCESS_MODE=bridge
+VMIX_BRIDGE_SECRET=<clave-compartida>
+PANEL_BASE_PATH=/lu2exteriores
+```
+
+En la PC donde corre vMix, abrir `Abrir Bridge LU2.cmd`, ingresar la URL publicada del panel y la misma clave compartida. El bridge toma los comandos del panel publicado y los ejecuta contra vMix local en `127.0.0.1:8088`.
+
 ## Overlays
 
 - Overlay 1: zocalo principal, input 58.
@@ -30,11 +42,12 @@ http://localhost:3000
 ## Archivos incluidos
 
 - `server.js`: servidor local y puente hacia vMix.
+- `bridge-client.js`: cliente local del bridge para panel publicado.
 - `public/`: interfaz del panel.
 - `runtime/node.exe`: Node portable incluido.
-- `tools/ffmpeg/`: ffmpeg portable para monitores fluidos.
 - `start-panel-local.ps1`: arranque local recomendado.
 - `Abrir Panel Radio LU2.cmd`: arranque por doble click contra vMix local.
+- `Abrir Bridge LU2.cmd`: arranque del bridge local contra vMix.
 
 ## Notas
 
@@ -44,7 +57,6 @@ http://localhost:3000
 
 ## Monitores
 
-- Program usa video continuo desde `vMix Video`.
-- Preview usa video continuo desde `vMix Video External 2`.
-- El panel fija `External 2` como `Preview` con `SetOutputExternal2`.
-- No se usa `External 3`, para que funcione en la version vieja de vMix.
+- Los lugares de Output 2, Program y BVC quedan reservados.
+- Por ahora el panel no pide streams ni snapshots de monitores.
+- Cuando se defina como usarlos, se conecta esa fuente sin tocar los controles principales.

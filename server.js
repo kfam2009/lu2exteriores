@@ -6,10 +6,13 @@ const { spawn } = require("child_process");
 
 const PORT = Number(process.env.PORT || 3000);
 const PANEL_BASE_PATH = normalizeBasePath(process.env.PANEL_BASE_PATH || "/lu2exteriores");
+const VMIX_ACCESS_MODE = process.env.VMIX_ACCESS_MODE || "direct";
+const USE_VMIX_BRIDGE = VMIX_ACCESS_MODE === "bridge";
+const VMIX_BRIDGE_SECRET = process.env.VMIX_BRIDGE_SECRET || "";
 const VMIX_HOST = process.env.VMIX_HOST || "127.0.0.1";
 const VMIX_PORT = Number(process.env.VMIX_PORT || 8088);
 const IS_REMOTE_VMIX = !["127.0.0.1", "localhost", "::1"].includes(VMIX_HOST.toLowerCase());
-const ENABLE_REMOTE_MONITORS = process.env.ENABLE_REMOTE_MONITORS !== "0";
+const ENABLE_REMOTE_MONITORS = process.env.ENABLE_REMOTE_MONITORS === "1";
 const PUBLIC_DIR = path.join(__dirname, "public");
 const FFMPEG_PATH = resolveFfmpegPath();
 const PREVIEW_SNAPSHOT_PATH = path.join(__dirname, "preview-live.jpg");
@@ -54,6 +57,11 @@ const MONITOR_DEVICES = {
 };
 const monitorStreams = new Map();
 let bahiaWeatherCache = { at: 0, data: null };
+let bridgeCommandId = 0;
+let bridgeLastSeenAt = 0;
+const bridgeQueue = [];
+const bridgePollers = [];
+const bridgePending = new Map();
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -502,6 +510,132 @@ function serveStatic(req, res) {
   });
 }
 
+function bridgeSecretFromRequest(req) {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  return req.headers["x-lu2-bridge-secret"] || url.searchParams.get("secret") || "";
+}
+
+function isBridgeAuthorized(req) {
+  return Boolean(VMIX_BRIDGE_SECRET) && bridgeSecretFromRequest(req) === VMIX_BRIDGE_SECRET;
+}
+
+function sendBridgeUnauthorized(res) {
+  send(res, 401, JSON.stringify({ error: "Bridge no autorizado" }), "application/json; charset=utf-8");
+}
+
+function bridgeStatusPayload() {
+  return {
+    mode: VMIX_ACCESS_MODE,
+    connected: Boolean(bridgeLastSeenAt && Date.now() - bridgeLastSeenAt < 45000),
+    lastSeenAt: bridgeLastSeenAt ? new Date(bridgeLastSeenAt).toISOString() : null,
+    queued: bridgeQueue.length,
+    pending: bridgePending.size
+  };
+}
+
+function dispatchBridgeCommands() {
+  while (bridgeQueue.length && bridgePollers.length) {
+    const command = bridgeQueue.shift();
+    const poller = bridgePollers.shift();
+    clearTimeout(poller.timer);
+    send(poller.res, 200, JSON.stringify(command), "application/json; charset=utf-8");
+  }
+}
+
+function enqueueBridgeCommand(pathname) {
+  return new Promise((resolve, reject) => {
+    if (!VMIX_BRIDGE_SECRET) {
+      reject(new Error("Falta VMIX_BRIDGE_SECRET en el servidor publicado."));
+      return;
+    }
+
+    const id = String(++bridgeCommandId);
+    const timeout = setTimeout(() => {
+      bridgePending.delete(id);
+      reject(new Error("Bridge vMix timeout"));
+    }, 12000);
+
+    bridgePending.set(id, { resolve, reject, timeout });
+    bridgeQueue.push({ id, path: pathname });
+    dispatchBridgeCommands();
+  });
+}
+
+async function serveBridgePoll(req, res) {
+  if (!isBridgeAuthorized(req)) {
+    sendBridgeUnauthorized(res);
+    return;
+  }
+
+  bridgeLastSeenAt = Date.now();
+
+  if (bridgeQueue.length) {
+    const command = bridgeQueue.shift();
+    send(res, 200, JSON.stringify(command), "application/json; charset=utf-8");
+    return;
+  }
+
+  const poller = {
+    res,
+    timer: setTimeout(() => {
+      const index = bridgePollers.indexOf(poller);
+      if (index >= 0) {
+        bridgePollers.splice(index, 1);
+      }
+      send(res, 204, "");
+    }, 25000)
+  };
+
+  bridgePollers.push(poller);
+  req.on("close", () => {
+    const index = bridgePollers.indexOf(poller);
+    if (index >= 0) {
+      clearTimeout(poller.timer);
+      bridgePollers.splice(index, 1);
+    }
+  });
+}
+
+async function serveBridgeResult(req, res) {
+  if (!isBridgeAuthorized(req)) {
+    sendBridgeUnauthorized(res);
+    return;
+  }
+
+  bridgeLastSeenAt = Date.now();
+
+  try {
+    const body = await readJsonBody(req);
+    const pending = bridgePending.get(String(body.id || ""));
+
+    if (!pending) {
+      send(res, 404, JSON.stringify({ error: "Comando no encontrado" }), "application/json; charset=utf-8");
+      return;
+    }
+
+    bridgePending.delete(String(body.id));
+    clearTimeout(pending.timeout);
+
+    if (body.error) {
+      pending.reject(new Error(String(body.error)));
+    } else {
+      pending.resolve({
+        statusCode: Number(body.statusCode || 200),
+        contentType: String(body.contentType || "text/xml; charset=utf-8"),
+        body: Buffer.from(String(body.bodyBase64 || ""), "base64")
+      });
+    }
+
+    send(res, 200, JSON.stringify({ ok: true }), "application/json; charset=utf-8");
+  } catch (error) {
+    send(res, 400, JSON.stringify({ error: error.message }), "application/json; charset=utf-8");
+  }
+}
+
+function serveBridgeStatus(req, res) {
+  send(res, 200, JSON.stringify(bridgeStatusPayload()), "application/json; charset=utf-8");
+}
+
 function proxyVmix(req, res) {
   const incomingUrl = new URL(req.url, `http://${req.headers.host}`);
   const query = incomingUrl.searchParams;
@@ -531,6 +665,26 @@ function proxyVmix(req, res) {
   }
 
   const vmixPath = `/api/?${query.toString()}`;
+
+  if (USE_VMIX_BRIDGE) {
+    enqueueBridgeCommand(vmixPath)
+      .then((result) => {
+        res.writeHead(result.statusCode, {
+          "Content-Type": result.contentType,
+          "Cache-Control": "no-store"
+        });
+        res.end(result.body);
+      })
+      .catch((error) => {
+        send(res, 503, JSON.stringify({
+          error: "Bridge vMix no disponible.",
+          detail: error.message,
+          bridge: bridgeStatusPayload()
+        }), "application/json; charset=utf-8");
+      });
+    return;
+  }
+
   let didRespond = false;
 
   const sendOnce = (statusCode, body, contentType) => {
@@ -935,7 +1089,23 @@ const server = http.createServer((req, res) => {
     serveZocalos(req, res);
     return;
   }
-  if (IS_REMOTE_VMIX && !ENABLE_REMOTE_MONITORS && pathname.startsWith("/monitor/")) {
+
+  if (pathname === "/bridge/poll") {
+    serveBridgePoll(req, res);
+    return;
+  }
+
+  if (pathname === "/bridge/result") {
+    serveBridgeResult(req, res);
+    return;
+  }
+
+  if (pathname === "/bridge/status") {
+    serveBridgeStatus(req, res);
+    return;
+  }
+
+  if (!ENABLE_REMOTE_MONITORS && pathname.startsWith("/monitor/")) {
     send(res, 204, "");
     return;
   }
@@ -984,6 +1154,11 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Panel LU2: http://localhost:${PORT}`);
+  if (USE_VMIX_BRIDGE) {
+    console.log("API vMix: modo bridge local");
+    return;
+  }
+
   console.log(`API vMix: http://${VMIX_HOST}:${VMIX_PORT}/api/`);
   setTimeout(initializeVmixState, 1500);
   setTimeout(enforceClockWeatherFields, 500);
