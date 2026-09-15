@@ -6,7 +6,7 @@ const { spawn } = require("child_process");
 
 const PORT = Number(process.env.PORT || 3000);
 const PANEL_BASE_PATH = normalizeBasePath(process.env.PANEL_BASE_PATH || "/lu2exteriores");
-const VMIX_HOST = process.env.VMIX_HOST || "172.27.79.174";
+const VMIX_HOST = process.env.VMIX_HOST || "127.0.0.1";
 const VMIX_PORT = Number(process.env.VMIX_PORT || 8088);
 const IS_REMOTE_VMIX = !["127.0.0.1", "localhost", "::1"].includes(VMIX_HOST.toLowerCase());
 const ENABLE_REMOTE_MONITORS = process.env.ENABLE_REMOTE_MONITORS !== "0";
