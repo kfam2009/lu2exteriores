@@ -54,7 +54,7 @@ const MULTIVIEW_INPUTS = ["6", "7", "8", "9"];
 const MULTIVIEW_BACKGROUND_LAYER = "1";
 const MULTIVIEW_BACKGROUND_INPUT = "11";
 const MULTIVIEW_LAYER_INDEXES = ["9", "8", "7", "6"];
-const MULTIVIEW_CAMERA_INPUTS = ["1", "2", "3", "4", "5", "78", "79", "80", "81"];
+const MULTIVIEW_CAMERA_INPUTS = ["1", "2", "3", "4", "5", "78", "79", "80", "81", "82", "83", "84", "85", "86"];
 const MULTIVIEW_STORAGE_KEY = "multiviewAssignmentsLayers9To6";
 const DIRECT_CUTS = [
   { input: "1", label: "Camara 1" },
@@ -68,6 +68,11 @@ const DIRECT_CUTS = [
   { input: "9", label: "5 Camaras" },
   { input: "25", label: "5 camaras mas panelista" },
   { input: "56", label: "Camara Plaza" },
+  { input: "82" },
+  { input: "83" },
+  { input: "84" },
+  { input: "85" },
+  { input: "86" },
   { input: "34", label: "Video Bahia" },
   { input: "30", label: "Video Horizontal" },
   { input: "31", label: "Video Vertical" },
@@ -296,7 +301,12 @@ const RADIO_MV_SOURCES = [
   { input: "78", label: "Input 78" },
   { input: "79", label: "Input 79" },
   { input: "80", label: "Input 80" },
-  { input: "81", label: "Input 81" }
+  { input: "81", label: "Input 81" },
+  { input: "82", label: "Input 82" },
+  { input: "83", label: "Input 83" },
+  { input: "84", label: "Input 84" },
+  { input: "85", label: "Input 85" },
+  { input: "86", label: "Input 86" }
 ];
 const RADIO_MV_SPECIAL_SOURCES = {};
 const RADIO_MV_SELECTED_KEY = "selectedRadioMultiviewLayout";
