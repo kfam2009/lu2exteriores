@@ -230,7 +230,7 @@ const CLOCK_WEATHER_INPUT = "59";
 const CLOCK_WEATHER_OVERLAY_SLOT = "3";
 const CLOCK_WEATHER_FIELD = "TextBlock1.Text";
 const CLOCK_WEATHER_EXTRA_FIELD = "TextBlock2.Text";
-const CLOCK_WEATHER_INTERVAL_MS = 3000;
+const CLOCK_WEATHER_ENABLED = false;
 const PROGRAM_NAME_OVERLAY_SLOT = "4";
 const PROGRAM_NAME_INPUTS = [
   { input: "73", label: "LECTURA LA NUEVA" },
@@ -510,6 +510,11 @@ async function bahiaTemperatureText() {
 }
 
 async function updateClockWeatherInput() {
+  if (!CLOCK_WEATHER_ENABLED) {
+    await clearClockWeatherInput();
+    return;
+  }
+
   let temperature = lastClockWeatherTemperature;
 
   try {
@@ -530,6 +535,25 @@ async function updateClockWeatherInput() {
     Value: ""
   });
   setLog(`Hora y temperatura actualizadas: ${text}`);
+}
+
+async function clearClockWeatherInput() {
+  await callVmix({
+    Function: "SetText",
+    Input: CLOCK_WEATHER_INPUT,
+    SelectedName: CLOCK_WEATHER_FIELD,
+    Value: ""
+  });
+  await callVmix({
+    Function: "SetText",
+    Input: CLOCK_WEATHER_INPUT,
+    SelectedName: CLOCK_WEATHER_EXTRA_FIELD,
+    Value: ""
+  });
+  await callVmix({
+    Function: `OverlayInput${CLOCK_WEATHER_OVERLAY_SLOT}Out`
+  });
+  setLog("Hora y temperatura fuera del aire.");
 }
 
 async function refreshClockWeatherInput() {
@@ -1592,7 +1616,7 @@ async function clearAllOverlays(label = "Overlays") {
     delete previewOverlayInputsBySlot[slot];
   }
 
-  setLog(`${label}: zocalos fuera; hora y temperatura se mantienen.`);
+  setLog(`${label}: zocalos fuera.`);
 }
 
 async function setDirectOverlays(isOn) {
@@ -3194,6 +3218,7 @@ document.addEventListener("keydown", async (event) => {
 });
 
 loadMonitorConfig();
+clearClockWeatherInput().catch((error) => setLog(error.message || "No pude apagar hora y temperatura."));
 refreshState();
 setInterval(refreshState, 500);
 setInterval(refreshDirectSnapshots, 1000);
