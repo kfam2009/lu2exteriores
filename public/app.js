@@ -54,7 +54,7 @@ const MULTIVIEW_INPUTS = ["6", "7", "8", "9"];
 const MULTIVIEW_BACKGROUND_LAYER = "1";
 const MULTIVIEW_BACKGROUND_INPUT = "11";
 const MULTIVIEW_LAYER_INDEXES = ["9", "8", "7", "6"];
-const MULTIVIEW_CAMERA_INPUTS = ["1", "2", "3", "4", "5"];
+const MULTIVIEW_CAMERA_INPUTS = ["1", "2", "3", "4", "5", "78", "79", "80", "81"];
 const MULTIVIEW_STORAGE_KEY = "multiviewAssignmentsLayers9To6";
 const DIRECT_CUTS = [
   { input: "1", label: "Camara 1" },
