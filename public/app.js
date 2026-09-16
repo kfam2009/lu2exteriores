@@ -89,6 +89,7 @@ const RESET_INPUTS = [
   { input: "5", label: "Reset Camara 5" },
   { input: "56", label: "Reset Camara Plaza" }
 ];
+const VISIBLE_TABS = new Set(["cut", "zocalos", "multiview"]);
 const TANDA_BUTTONS = [
   { key: "eti-1", label: "TANDA ESTA TODO INVENTADO 1", input: "48" },
   { key: "eti-2", label: "TANDA ESTA TODO INVENTADO 2", input: "49" },
@@ -416,16 +417,17 @@ function saveMultiviewAssignment(multiviewInput, positionIndex, cameraInput) {
 }
 
 function setActiveTab(tabName) {
-  state.activeTab = tabName;
+  const activeTab = VISIBLE_TABS.has(tabName) ? tabName : "cut";
+  state.activeTab = activeTab;
   els.tabButtons.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.tab === tabName);
+    button.classList.toggle("is-active", button.dataset.tab === activeTab);
   });
 
   els.tabPanels.forEach((panel) => {
-    panel.hidden = panel.dataset.tabPanel !== tabName;
+    panel.hidden = panel.dataset.tabPanel !== activeTab;
   });
 
-  if (tabName === "zocalos") {
+  if (activeTab === "zocalos") {
     renderOverlays();
   }
 }
