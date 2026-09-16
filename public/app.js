@@ -741,7 +741,7 @@ function renderMonitorFeed(kind, url) {
 function rtcUrl() {
   const url = new URL(window.PANEL_CONFIG?.rtcPath || "/rtc", window.location.href);
   url.protocol = url.protocol === "https:" ? "wss:" : "ws:";
-  url.search = `?role=viewer&viewerId=${encodeURIComponent(rtcMonitors.viewerId)}`;
+  url.search = `?role=viewer&channel=lu2&viewerId=${encodeURIComponent(rtcMonitors.viewerId)}`;
   return url.toString();
 }
 
