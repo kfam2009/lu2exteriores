@@ -11,4 +11,10 @@ $env:VMIX_HOST = "127.0.0.1"
 $env:VMIX_PORT = "8088"
 
 Set-Location $root
-& $node ".\bridge-client.js"
+while ($true) {
+  Write-Host "Iniciando Bridge LU2..."
+  & $node ".\bridge-client.js"
+  $exitCode = $LASTEXITCODE
+  Write-Host "Bridge LU2 se cerro con codigo $exitCode. Reiniciando en 3 segundos..."
+  Start-Sleep -Seconds 3
+}

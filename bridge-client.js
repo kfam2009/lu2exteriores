@@ -5,6 +5,7 @@ const PANEL_BASE_URL = (process.env.PANEL_BASE_URL || "").replace(/\/+$/, "");
 const VMIX_HOST = process.env.VMIX_HOST || "127.0.0.1";
 const VMIX_PORT = Number(process.env.VMIX_PORT || 8088);
 const POLL_DELAY_MS = 1200;
+const ERROR_DELAY_MS = 2500;
 
 if (!PANEL_BASE_URL) {
   console.error("Falta PANEL_BASE_URL.");
@@ -115,9 +116,17 @@ async function run() {
       await pollOnce();
     } catch (error) {
       console.error(`[bridge] ${error.message}`);
-      await new Promise((resolve) => setTimeout(resolve, POLL_DELAY_MS));
+      await new Promise((resolve) => setTimeout(resolve, ERROR_DELAY_MS));
     }
   }
 }
+
+process.on("uncaughtException", (error) => {
+  console.error(`[bridge] error no capturado: ${error.message}`);
+});
+
+process.on("unhandledRejection", (error) => {
+  console.error(`[bridge] promesa rechazada: ${error?.message || error}`);
+});
 
 run();
