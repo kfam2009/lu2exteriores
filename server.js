@@ -26,6 +26,7 @@ const CLOCK_WEATHER_OVERLAY_SLOT = "3";
 const CLOCK_WEATHER_FIELD = "TextBlock1.Text";
 const CLOCK_WEATHER_EXTRA_FIELD = "TextBlock2.Text";
 const CLOCK_WEATHER_INTERVAL_MS = 3000;
+const CLOCK_WEATHER_ENABLED = false;
 const PROGRAM_NAME_FIELDS = ["TextBlock1.Text", "TextBlock2.Text"];
 const PROGRAM_NAME_DEFAULTS = {
   "60": "PANORAMA",
@@ -358,30 +359,28 @@ async function enforceClockWeatherFields() {
     const inputPattern = new RegExp(`<input[^>]*number=["']${CLOCK_WEATHER_INPUT}["'][^>]*>([\\s\\S]*?)<\\/input>`);
     const inputXml = vmixXml.match(inputPattern)?.[0] || "";
 
-    if (!inputXml) {
-      return;
-    }
+    if (CLOCK_WEATHER_ENABLED && inputXml) {
+      const currentClock = textFieldFromInputXml(inputXml, CLOCK_WEATHER_FIELD);
+      const currentTemperature = textFieldFromInputXml(inputXml, CLOCK_WEATHER_EXTRA_FIELD);
+      const recoveredTemperature =
+        currentTemperature.match(/-?\d+(?:[.,]\d+)?\s*°C/)?.[0] ||
+        currentClock.match(/-?\d+(?:[.,]\d+)?\s*°C/)?.[0] ||
+        lastClockWeatherTemperature;
+      const expectedClock = bahiaTimeText();
 
-    const currentClock = textFieldFromInputXml(inputXml, CLOCK_WEATHER_FIELD);
-    const currentTemperature = textFieldFromInputXml(inputXml, CLOCK_WEATHER_EXTRA_FIELD);
-    const recoveredTemperature =
-      currentTemperature.match(/-?\d+(?:[.,]\d+)?\s*°C/)?.[0] ||
-      currentClock.match(/-?\d+(?:[.,]\d+)?\s*°C/)?.[0] ||
-      lastClockWeatherTemperature;
-    const expectedClock = bahiaTimeText();
+      if (recoveredTemperature) {
+        lastClockWeatherTemperature = recoveredTemperature;
+      }
 
-    if (recoveredTemperature) {
-      lastClockWeatherTemperature = recoveredTemperature;
-    }
+      if (currentClock !== expectedClock) {
+        await callVmixApi(`/api/?Function=SetText&Input=${CLOCK_WEATHER_INPUT}&SelectedName=${encodeURIComponent(CLOCK_WEATHER_FIELD)}&Value=${encodeURIComponent(expectedClock)}`);
+        lastSentClockText = expectedClock;
+      }
 
-    if (currentClock !== expectedClock) {
-      await callVmixApi(`/api/?Function=SetText&Input=${CLOCK_WEATHER_INPUT}&SelectedName=${encodeURIComponent(CLOCK_WEATHER_FIELD)}&Value=${encodeURIComponent(expectedClock)}`);
-      lastSentClockText = expectedClock;
-    }
-
-    if (lastClockWeatherTemperature && currentTemperature !== lastClockWeatherTemperature) {
-      await callVmixApi(`/api/?Function=SetText&Input=${CLOCK_WEATHER_INPUT}&SelectedName=${encodeURIComponent(CLOCK_WEATHER_EXTRA_FIELD)}&Value=${encodeURIComponent(lastClockWeatherTemperature)}`);
-      lastSentTemperatureText = lastClockWeatherTemperature;
+      if (lastClockWeatherTemperature && currentTemperature !== lastClockWeatherTemperature) {
+        await callVmixApi(`/api/?Function=SetText&Input=${CLOCK_WEATHER_INPUT}&SelectedName=${encodeURIComponent(CLOCK_WEATHER_EXTRA_FIELD)}&Value=${encodeURIComponent(lastClockWeatherTemperature)}`);
+        lastSentTemperatureText = lastClockWeatherTemperature;
+      }
     }
 
     for (const [programInput, expectedName] of Object.entries(PROGRAM_NAME_DEFAULTS)) {
@@ -415,7 +414,20 @@ async function getBahiaWeatherData() {
   return data;
 }
 
+async function clearClockWeatherInput() {
+  await callVmixApi(`/api/?Function=SetText&Input=${CLOCK_WEATHER_INPUT}&SelectedName=${encodeURIComponent(CLOCK_WEATHER_FIELD)}&Value=`);
+  await callVmixApi(`/api/?Function=SetText&Input=${CLOCK_WEATHER_INPUT}&SelectedName=${encodeURIComponent(CLOCK_WEATHER_EXTRA_FIELD)}&Value=`);
+  await callVmixApi(`/api/?Function=OverlayInput${CLOCK_WEATHER_OVERLAY_SLOT}Out`);
+  lastSentClockText = "";
+  lastSentTemperatureText = "";
+}
+
 async function updateClockWeatherInput() {
+  if (!CLOCK_WEATHER_ENABLED) {
+    await clearClockWeatherInput();
+    return;
+  }
+
   let temperature = lastClockWeatherTemperature;
 
   try {
