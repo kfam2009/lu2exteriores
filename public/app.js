@@ -292,7 +292,11 @@ const RADIO_MV_SOURCES = [
   { input: "2", label: "Camara 2" },
   { input: "3", label: "Camara 3" },
   { input: "4", label: "Camara 4" },
-  { input: "5", label: "Camara 5" }
+  { input: "5", label: "Camara 5" },
+  { input: "78", label: "Input 78" },
+  { input: "79", label: "Input 79" },
+  { input: "80", label: "Input 80" },
+  { input: "81", label: "Input 81" }
 ];
 const RADIO_MV_SPECIAL_SOURCES = {};
 const RADIO_MV_SELECTED_KEY = "selectedRadioMultiviewLayout";
